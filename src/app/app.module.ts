@@ -1,18 +1,25 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core'
+import { BrowserModule } from '@angular/platform-browser'
+import { ReactiveFormsModule } from '@angular/forms'
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
+import { RegisterComponent } from './public/register/register.component'
+import { RegisterContainerComponent } from './public/register-container/container.component'
 
-@NgModule({
+@NgModule( {
   declarations: [
-    AppComponent
+    AppComponent,
+    RegisterComponent,
+    RegisterContainerComponent
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
+  bootstrap: [ AppComponent ]
+} )
+export class AppModule {}

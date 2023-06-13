@@ -1,0 +1,23 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <label for="username">Username:</label>
+  <input
+    [ngClass]="{ 'red-border': isInvalidUsername }"
+    type="text"
+    name="username"
+    id="username"
+    formControlName="username"
+  />
+  <p *ngIf="showError" [innerHTML]="userNameError"></p>
+
+  <label for="password">Password:</label>
+  <input
+    [ngClass]="{ 'red-border': isInvalidPassword }"
+    type="password"
+    name="password"
+    id="password"
+    formControlName="password"
+  />
+  <p *ngIf="showError" [innerHTML]="passwordError"></p>
+
+  <button type="submit">Register</button>
+</form>
