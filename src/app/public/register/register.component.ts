@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms'
 import { registerContent } from '../register.content'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 
 @Component( {
   selector: 'app-register',
@@ -25,7 +26,7 @@ export class RegisterComponent {
     return this.registerForm.controls.password.touched && !this.registerForm.controls.password.valid
   }
 
-  constructor ( private formBuilder: FormBuilder ) {
+  constructor ( private formBuilder: FormBuilder, private http: HttpClient ) {
 
   }
   registerForm = this.formBuilder.group( {
@@ -76,6 +77,7 @@ export class RegisterComponent {
 
     return valid ? null : { invalid: true }
   }
+
 
 
   onSubmit(): void {
