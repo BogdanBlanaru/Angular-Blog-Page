@@ -1,18 +1,22 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms'
 import { registerContent } from '../register.content'
-import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
+import { RegisterServiceService } from '../services/register-service.service'
+import { baseURLDatabase } from 'src/environoments/environoment'
 
 @Component( {
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: [ './register.component.css' ]
 } )
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   showError = false
   content = registerContent
   userNameError = ''
   passwordError = ''
+  usersArray: any
+  userIsDuplicate = false
 
   get isSubmitDisabled() {
     return !this.registerForm.valid
@@ -26,13 +30,17 @@ export class RegisterComponent {
     return this.registerForm.controls.password.touched && !this.registerForm.controls.password.valid
   }
 
-  constructor ( private formBuilder: FormBuilder, private http: HttpClient ) {
+  constructor ( private formBuilder: FormBuilder, private http: HttpClient, private registerService: RegisterServiceService ) {
 
   }
   registerForm = this.formBuilder.group( {
     username: [ '', [ Validators.required, ( control: AbstractControl ) => this.usernameValidator( control ) ] ],
     password: [ '', [ Validators.required, ( control: AbstractControl ) => this.passwordValidator( control ) ] ]
   } )
+
+  ngOnInit(): void {
+    this.getUsers()
+  }
 
   usernameValidator( control: AbstractControl ): ValidationErrors | null {
     const nameRegex = /^[a-zA-Z]+$/
@@ -78,21 +86,36 @@ export class RegisterComponent {
     return valid ? null : { invalid: true }
   }
 
+  getUsers() {
+    this.http.get( `${ baseURLDatabase }users` ).subscribe( data => {
+      this.usersArray = data
+    } )
+
+  }
+
+  isDuplicateUser() {
+    return this.usersArray.some( ( user: { username: string } ) => user.username === this.registerForm.controls.username.value )
+
+  }
 
 
-  onSubmit(): void {
+
+  async onSubmit() {
     this.showError = true
     this.registerForm.markAllAsTouched()
+    if ( await this.isDuplicateUser() ) {
+      this.userNameError = this.content.userName.notUniqueError
+    }
     if ( !this.registerForm.controls.username.value ) {
       this.userNameError = this.content.default.emptyInputErrorMessage
     }
     if ( !this.registerForm.controls.password.value ) {
       this.passwordError = this.content.default.emptyInputErrorMessage
     }
-    if ( this.registerForm.valid ) {
-      console.warn( 'utilizator inregistrat' )
-      window.location.href = '/login'
+    if ( this.registerForm.valid && !( await this.isDuplicateUser() ) ) {
+      this.registerService.register( { username: 'Test', password: 'passwword' } )
     }
+
 
 
   }

@@ -2,6 +2,7 @@ export const registerContent = {
     userName: {
         usernameLengthError: 'The username need to have between 5 and 12 characters',
         userNameAlphanumericError: 'The username must contain only alphanumebric characters',
+        notUniqueError: 'The username is already taken.'
     },
     password: {
         passwordLengthError: 'The password must have at least 8 characters',
