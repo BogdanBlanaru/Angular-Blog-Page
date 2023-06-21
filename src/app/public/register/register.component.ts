@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { AbstractControl, FormBuilder, ValidationErrors, Validators } from '@angular/forms'
-import { registerContent } from '../register.content'
+import { registerContent } from '../content/register.content'
 import { HttpClient } from '@angular/common/http'
 import { RegisterServiceService } from '../services/register-service.service'
 import { baseURLDatabase } from 'src/environoments/environoment'
@@ -115,8 +115,6 @@ export class RegisterComponent implements OnInit {
     if ( this.registerForm.valid && !( await this.isDuplicateUser() ) ) {
       this.registerService.register( { username: 'Test', password: 'passwword' } )
     }
-
-
 
   }
 }
