@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { registerContent } from '../register.content';
+import { registerContent } from '../content/register.content';
 
 @Component({
   selector: 'app-input',

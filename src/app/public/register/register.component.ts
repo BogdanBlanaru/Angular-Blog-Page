@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { registerContent } from '../register.content';
+import { registerContent } from '../content/register.content';
 import { HttpClient } from '@angular/common/http';
 import { RegisterServiceService } from '../services/register-service.service';
 import { baseURLDatabase } from 'src/environoments/environoment';
