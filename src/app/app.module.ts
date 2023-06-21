@@ -1,22 +1,22 @@
-import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module'
-import { AppComponent } from './app.component'
-import { RegisterComponent } from './public/register/register.component'
-import { RegisterContainerComponent } from './public/register-container/container.component'
-import { HomeComponent } from './public/home/home.component'
-import { HttpClientModule } from '@angular/common/http'
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { RegisterComponent } from './public/register/register.component';
+import { RegisterContainerComponent } from './public/register-container/container.component';
+import { HomeComponent } from './public/home/home.component';
+import { HttpClientModule } from '@angular/common/http';
+import { InputComponent } from './public/input/input.component';
 
-
-@NgModule( {
+@NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     RegisterContainerComponent,
-    HomeComponent
-
+    HomeComponent,
+    InputComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,6 +26,6 @@ import { HttpClientModule } from '@angular/common/http'
     HttpClientModule,
   ],
   providers: [],
-  bootstrap: [ AppComponent ]
-} )
+  bootstrap: [AppComponent],
+})
 export class AppModule {}
