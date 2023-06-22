@@ -1,15 +1,19 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { registerData } from '../../models/interfaces/registerInterface';
-import { baseURLDatabase } from 'src/environoments/environoment';
+import { HttpClient } from '@angular/common/http'
+import { Injectable } from '@angular/core'
+import { RegisterData } from '../../models/interfaces/registerInterface'
+import { baseURLDatabase } from 'src/environoments/environoment'
 
-@Injectable({
+@Injectable( {
   providedIn: 'root',
-})
+} )
 export class RegisterServiceService {
-  constructor(private http: HttpClient) {}
-
-  register(data: registerData) {
-    alert('Account registartion completed succefully');
+  constructor ( private http: HttpClient ) {}
+  getUsers() {
+    this.http.get( `${ baseURLDatabase }users` ).subscribe( ( data ) => {
+      return data
+    } )
+  }
+  register( data: RegisterData ) {
+    alert( data.username )
   }
 }
